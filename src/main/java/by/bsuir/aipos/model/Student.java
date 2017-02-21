@@ -3,7 +3,6 @@ package by.bsuir.aipos.model;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlTransient;
 import java.util.Date;
 
 @Entity

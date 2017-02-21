@@ -1,12 +1,9 @@
 package by.bsuir.aipos.cxfserver;
 
 import by.bsuir.aipos.cxflib.StudentWebServiceImpl;
-import by.bsuir.aipos.service.StudentGroupServiceImpl;
 import org.apache.log4j.Logger;
 
 import javax.xml.ws.Endpoint;
-import java.util.List;
-import java.util.logging.Handler;
 
 public class StudentServer {
 
@@ -29,9 +26,8 @@ public class StudentServer {
 
     private void start() {
         try {
-            System.out.println("Starting Server");
             StudentWebServiceImpl implementor = new StudentWebServiceImpl();
-            String address = "http://192.168.38.29:" + port + "/student";
+            String address = "http://0.0.0.0:" + port + "/student";
             Endpoint.publish(address, implementor);
             startServer();
             logger.info("Start on port : " + port);

@@ -1,14 +1,10 @@
 package by.bsuir.aipos.cxfclient;
 
-import by.bsuir.aipos.model.Student;
-import by.bsuir.aipos.model.StudentGroup;
 import by.bsuir.aipos.model.StudentXML;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Pattern;
 
 public class MainWindow {
@@ -21,14 +17,14 @@ public class MainWindow {
     private StudentTable studentTable;
 
     public MainWindow() {
-        frame = new JFrame("Thrifts Student Client");
+        frame = new JFrame("SOAP Student Client");
         host = getHost();
         port = getPort();
         frame.setLayout(new BorderLayout());
         frame.add(createToolBar(), BorderLayout.NORTH);
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        frame.addWindowListener(new ExitAdapter(this));
+        frame.addWindowListener(new ExitAdapter());
         studentTable = new StudentTable(this);
         frame.add(studentTable, BorderLayout.CENTER);
         frame.setVisible(true);

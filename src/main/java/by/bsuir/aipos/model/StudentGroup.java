@@ -1,7 +1,6 @@
 package by.bsuir.aipos.model;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 import java.util.List;
 

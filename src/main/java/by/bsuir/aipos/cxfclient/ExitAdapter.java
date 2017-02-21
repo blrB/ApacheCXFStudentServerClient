@@ -6,12 +6,6 @@ import java.awt.event.WindowEvent;
 
 public class ExitAdapter extends WindowAdapter {
 
-    private MainWindow mainWindow;
-
-    public ExitAdapter(MainWindow mainWindow) {
-        this.mainWindow = mainWindow;
-    }
-
     @Override
     public void windowClosing(WindowEvent e) {
         int confirm = JOptionPane.showOptionDialog(

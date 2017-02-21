@@ -1,8 +1,6 @@
 package by.bsuir.aipos.cxfclient;
 
 import by.bsuir.aipos.cxfserver.StudentServer;
-import by.bsuir.aipos.model.Student;
-import by.bsuir.aipos.model.StudentGroup;
 import by.bsuir.aipos.model.StudentGroupXML;
 import by.bsuir.aipos.model.StudentXML;
 import com.toedter.calendar.JDateChooser;

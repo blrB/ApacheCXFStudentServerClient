@@ -1,6 +1,5 @@
 package by.bsuir.aipos.cxfclient;
 
-import by.bsuir.aipos.model.Student;
 import by.bsuir.aipos.model.StudentXML;
 
 import javax.swing.*;
@@ -24,9 +23,9 @@ public class StudentTable extends JComponent {
         scrollPane.repaint();
     }
 
-    public void createPanel() {
+    private void createPanel() {
         listOfStudent = mainWindow.getStudentClient().getAllStudent();
-        StudentTableModel model = new StudentTableModel(listOfStudent, mainWindow);
+        StudentTableModel model = new StudentTableModel(listOfStudent);
         table = new JTable(model);
         scrollPane = new JScrollPane(table);
         scrollPane.getHorizontalScrollBar().addAdjustmentListener(evt -> updateScrollPane());
