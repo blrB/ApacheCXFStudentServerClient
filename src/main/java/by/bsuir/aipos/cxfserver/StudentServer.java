@@ -31,7 +31,7 @@ public class StudentServer {
         try {
             System.out.println("Starting Server");
             StudentWebServiceImpl implementor = new StudentWebServiceImpl();
-            String address = "http://localhost:" + port + "/student";
+            String address = "http://192.168.38.29:" + port + "/student";
             Endpoint.publish(address, implementor);
             startServer();
             logger.info("Start on port : " + port);

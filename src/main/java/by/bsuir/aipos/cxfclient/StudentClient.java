@@ -30,10 +30,11 @@ public class StudentClient extends Thread {
     public void run() {
         MainWindow.logger.info("Start client");
         try {
-            Service service = Service.create(new URL("http://" + host + ":" + port + "/student"), SERVICE_NAME);
+            Service service = Service.create(new URL("http://" + host + ":" + port + "/student?wsdl"), SERVICE_NAME);
             studentWebService = service.getPort(StudentWebService.class);
             mainWindow.updateTable();
         } catch (Exception e) {
+            e.printStackTrace();
             MainWindow.logger.error("Error in StudentClient run() ");
             MainWindow.logger.trace(e);
             System.exit(-1);
