@@ -2,6 +2,7 @@ package by.bsuir.aipos.cxflib;
 
 import by.bsuir.aipos.model.Student;
 import by.bsuir.aipos.model.StudentGroup;
+import by.bsuir.aipos.model.StudentGroupXML;
 import by.bsuir.aipos.model.StudentXML;
 import by.bsuir.aipos.service.StudentGroupService;
 import by.bsuir.aipos.service.StudentGroupServiceImpl;
@@ -18,19 +19,34 @@ import java.util.List;
 public class StudentWebServiceImpl implements StudentWebService {
 
     private static Logger logger = Logger.getLogger(StudentWebServiceImpl.class);
-    private StudentGroupService studentGroupService = new StudentGroupServiceImpl();
-    private StudentService studentService = new StudentServiceImpl();
+    private static StudentGroupService studentGroupService = new StudentGroupServiceImpl();
+    private static StudentService studentService = new StudentServiceImpl();
 
-    @Override
-    public Student saveStudent(Student student) {
-        logger.info("Save student " + student.getLastName());
-        return studentService.save(student);
+    public static Logger getLogger() {
+        return logger;
+    }
+
+    public static StudentGroupService getStudentGroupService() {
+        return studentGroupService;
+    }
+
+    public static StudentService getStudentService() {
+        return studentService;
     }
 
     @Override
-    public Student getStudent(long id) {
+    public StudentXML saveStudent(StudentXML studentXML) {
+        logger.info("Save student " + studentXML.getLastName());
+        Student student = studentService.save(ConverterForStudentXMLAndORM.convert(studentXML));
+        studentXML.setId(student.getId());
+        return studentXML;
+    }
+
+    @Override
+    public StudentXML getStudent(long id) {
         logger.info("Get student " + id);
-        return studentService.get(id);
+        StudentXML studentXML = ConverterForStudentXMLAndORM.convert(studentService.get(id));
+        return studentXML;
     }
 
     @Override
@@ -42,37 +58,35 @@ public class StudentWebServiceImpl implements StudentWebService {
     @Override
     public StudentXML[] getAllStudent(){
         logger.info("Get all students");
-        List<Student> list = studentService.getAll();
-        List<StudentXML> listXml = new ArrayList<>();
-        for (Student student: list) {
-            listXml.add(new StudentXML(
-                    student.getFirstName(),
-                    student.getLastName(),
-                    student.getMiddleName(),
-                    student.getDateOfBirth().toString(),
-                    student.getHomeAddress(),
-                    student.getStudentGroup().getName()
-                    ));
-        }
-        return listXml.toArray(new StudentXML[listXml.size()]);
+        List<Student> students = studentService.getAll();
+        List<StudentXML> studentsXML  = new ArrayList<>();
+        students.forEach(student -> {
+            StudentXML studentXML = ConverterForStudentXMLAndORM.convert(student);
+            studentsXML.add(studentXML);
+        });
+        return studentsXML.toArray(new StudentXML[studentsXML.size()]);
     }
 
     @Override
-    public StudentGroup saveStudentGroup(StudentGroup group) {
+    public StudentGroupXML saveStudentGroup(StudentGroupXML group) {
         logger.info("Save group " + group.getName());
-        return studentGroupService.save(group);
+        StudentGroup studentGroup = studentGroupService.save(ConverterForStudentXMLAndORM.convert(group));
+        group.setId(studentGroup.getId());
+        return group;
     }
 
     @Override
-    public StudentGroup getStudentGroup(long id) {
+    public StudentGroupXML getStudentGroup(long id) {
         logger.info("Get student group " + id);
-        return studentGroupService.get(id);
+        StudentGroupXML studentGroupXML = ConverterForStudentXMLAndORM.convert(studentGroupService.get(id));
+        return studentGroupXML;
     }
 
     @Override
-    public StudentGroup getStudentGroupByName(String name) {
+    public StudentGroupXML getStudentGroupByName(String name) {
         logger.info("Get student group " + name);
-        return studentGroupService.get(name);
+        StudentGroupXML studentGroupXML = ConverterForStudentXMLAndORM.convert(studentGroupService.get(name));
+        return studentGroupXML;
     }
 
     @Override
@@ -82,9 +96,13 @@ public class StudentWebServiceImpl implements StudentWebService {
     }
 
     @Override
-    public StudentGroup[] getAllStudentGroup() {
+    public StudentGroupXML[] getAllStudentGroup() {
         logger.info("Get all student");
-        List<StudentGroup> list = studentGroupService.getAll();
-        return list.toArray(new StudentGroup[list.size()]);
+        List<StudentGroup> studentGroups = studentGroupService.getAll();
+        List<StudentGroupXML> studentGroupsXML  = new ArrayList<>();
+        studentGroups.forEach(group -> {
+            studentGroupsXML.add(ConverterForStudentXMLAndORM.convert(group));
+        });
+        return studentGroupsXML.toArray(new StudentGroupXML[studentGroupsXML.size()]);
     }
 }

@@ -8,12 +8,22 @@ public class StudentXML {
     private String middleName;
     private String dateOfBirth;
     private String homeAddress;
-    private String studentGroup;
+    private StudentGroupXML studentGroup;
 
     public StudentXML(){
     }
 
-    public StudentXML(String firstName, String lastName, String middleName, String dateOfBirth, String homeAddress, String studentGroup) {
+    public StudentXML(String firstName, String lastName, String middleName, String dateOfBirth, String homeAddress, StudentGroupXML studentGroup) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
+        this.dateOfBirth = dateOfBirth;
+        this.homeAddress = homeAddress;
+        this.studentGroup = studentGroup;
+    }
+
+    public StudentXML(long id, String firstName, String lastName, String middleName, String dateOfBirth, String homeAddress, StudentGroupXML studentGroup) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
@@ -70,11 +80,11 @@ public class StudentXML {
         this.homeAddress = homeAddress;
     }
 
-    public String getStudentGroup() {
+    public StudentGroupXML getStudentGroupXML() {
         return studentGroup;
     }
 
-    public void setStudentGroup(String studentGroup) {
+    public void setStudentGroupXML(StudentGroupXML studentGroup) {
         this.studentGroup = studentGroup;
     }
 

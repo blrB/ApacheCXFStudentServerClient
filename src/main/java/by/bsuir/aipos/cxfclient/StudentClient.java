@@ -1,8 +1,8 @@
 package by.bsuir.aipos.cxfclient;
 
 import by.bsuir.aipos.cxflib.StudentWebService;
-import by.bsuir.aipos.model.Student;
-import by.bsuir.aipos.model.StudentGroup;
+import by.bsuir.aipos.model.StudentGroupXML;
+import by.bsuir.aipos.model.StudentXML;
 
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
@@ -14,9 +14,7 @@ import java.util.List;
 public class StudentClient extends Thread {
 
     private static final QName SERVICE_NAME
-            = new QName("http://cxflib.aipos.bsuir.by/", "HelloWorld");
-    private static final QName PORT_NAME
-            = new QName("http://cxflib.aipos.bsuir.by/", "HelloWorldPort");
+            = new QName("http://cxflib.aipos.bsuir.by/", "StudentWebService");
     private StudentWebService studentWebService;
     private final MainWindow mainWindow;
     private int port;
@@ -42,7 +40,7 @@ public class StudentClient extends Thread {
         }
     }
 
-    public Student saveStudent(Student student) {
+    public StudentXML saveStudent(StudentXML student) {
         try {
             student = studentWebService.saveStudent(student);
         } catch (Exception e) {
@@ -52,8 +50,8 @@ public class StudentClient extends Thread {
         return student;
     }
 
-    public Student getStudent(long id) {
-        Student student = new Student();
+    public StudentXML getStudent(long id) {
+        StudentXML student = new StudentXML();
         try {
             student = studentWebService.getStudent(id);
         } catch (Exception e) {
@@ -72,10 +70,10 @@ public class StudentClient extends Thread {
         }
     }
 
-    public List<Student> getAllStudent(){
-        List<Student> student = new ArrayList<>();
+    public List<StudentXML> getAllStudent(){
+        List<StudentXML> student = new ArrayList<>();
         try {
-            //student = Arrays.asList(studentWebService.getAllStudent());
+            student = Arrays.asList(studentWebService.getAllStudent());
         } catch (Exception e) {
             MainWindow.logger.error("Error in getAllStudent");
             MainWindow.logger.trace(e);
@@ -83,7 +81,7 @@ public class StudentClient extends Thread {
         return student;
     }
 
-    public StudentGroup saveStudentGroup(StudentGroup studentGroup) {
+    public StudentGroupXML saveStudentGroup(StudentGroupXML studentGroup) {
         try {
             studentGroup = studentWebService.saveStudentGroup(studentGroup);
         } catch (Exception e) {
@@ -93,8 +91,8 @@ public class StudentClient extends Thread {
         return studentGroup;
     }
 
-    public StudentGroup getStudentGroup(long id) {
-        StudentGroup studentGroup = new StudentGroup();
+    public StudentGroupXML getStudentGroup(long id) {
+        StudentGroupXML studentGroup = new StudentGroupXML();
         try {
             studentGroup = studentWebService.getStudentGroup(id);
         } catch (Exception e) {
@@ -104,8 +102,8 @@ public class StudentClient extends Thread {
         return studentGroup;
     }
 
-    public StudentGroup getStudentGroupByName(String name) {
-        StudentGroup studentGroup = new StudentGroup();
+    public StudentGroupXML getStudentGroupByName(String name) {
+        StudentGroupXML studentGroup = new StudentGroupXML();
         try {
             studentGroup = studentWebService.getStudentGroupByName(name);
         } catch (Exception e) {
@@ -124,8 +122,8 @@ public class StudentClient extends Thread {
         }
     }
 
-    public List<StudentGroup> getAllStudentGroup() {
-        List<StudentGroup> studentGroups = new ArrayList<>();
+    public List<StudentGroupXML> getAllStudentGroup() {
+        List<StudentGroupXML> studentGroups = new ArrayList<>();
         try {
             studentGroups = Arrays.asList(studentWebService.getAllStudentGroup());
         } catch (Exception e) {

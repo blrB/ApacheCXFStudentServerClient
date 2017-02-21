@@ -1,6 +1,7 @@
 package by.bsuir.aipos.cxfclient;
 
 import by.bsuir.aipos.model.Student;
+import by.bsuir.aipos.model.StudentXML;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +12,7 @@ public class StudentTable extends JComponent {
     private MainWindow mainWindow;
     private JTable table;
     private JScrollPane scrollPane;
-    private List<Student> listOfStudent;
+    private List<StudentXML> listOfStudent;
 
     public StudentTable(MainWindow mainWindow){
         this.mainWindow = mainWindow;
@@ -40,7 +41,7 @@ public class StudentTable extends JComponent {
         repaint();
     }
 
-    public Student getSelectedStudent(){
+    public StudentXML getSelectedStudent(){
         if (table.getSelectedRow() < 0){
             return null;
         }

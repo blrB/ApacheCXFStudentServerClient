@@ -2,6 +2,7 @@ package by.bsuir.aipos.cxfclient;
 
 import by.bsuir.aipos.model.Student;
 import by.bsuir.aipos.model.StudentGroup;
+import by.bsuir.aipos.model.StudentXML;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
@@ -57,7 +58,7 @@ public class MainWindow {
     }
 
     private void editStudent(){
-        Student student = studentTable.getSelectedStudent();
+        StudentXML student = studentTable.getSelectedStudent();
         if (student != null) {
             logger.info("Edit student");
             StudentDialog dialog = new StudentDialog(this, "Edit Student");
@@ -73,7 +74,7 @@ public class MainWindow {
     }
 
     private void removeStudent(){
-        Student student = studentTable.getSelectedStudent();
+        StudentXML student = studentTable.getSelectedStudent();
         if (student != null) {
             logger.info("Remove student");
             int confirm = JOptionPane.showOptionDialog(
@@ -147,6 +148,10 @@ public class MainWindow {
 
     public JFrame getFrame() {
         return frame;
+    }
+
+    public static Logger getLogger() {
+        return logger;
     }
 }
 

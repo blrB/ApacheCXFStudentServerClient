@@ -1,6 +1,6 @@
 package by.bsuir.aipos.cxfclient;
 
-import by.bsuir.aipos.model.Student;
+import by.bsuir.aipos.model.StudentXML;
 
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
@@ -23,9 +23,9 @@ public class StudentTableModel implements TableModel {
     private final static String DATE_OF_BIRTH_COLUMN = "DATE OF BIRTH";
     private final static String ADDRESS_COLUMN = "ADDRESS";
     private final static String GROUP_COLUMN = "GROUP";
-    private List<Student> students;
+    private List<StudentXML> students;
 
-    public StudentTableModel(List<Student> students, MainWindow mainWindow) {
+    public StudentTableModel(List<StudentXML> students, MainWindow mainWindow) {
         this.students = students;
     }
 
@@ -74,7 +74,7 @@ public class StudentTableModel implements TableModel {
             case MIDDLE_NAME:
                 return String.class;
             case DATE_OF_BIRTH:
-                return Date.class;
+                return String.class;
             case ADDRESS:
                 return String.class;
             case GROUP:
@@ -96,20 +96,20 @@ public class StudentTableModel implements TableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Student studentThrift = students.get(rowIndex);
+        StudentXML studentXML = students.get(rowIndex);
         switch (columnIndex) {
             case FIRST_NAME:
-                return studentThrift.getFirstName();
+                return studentXML.getFirstName();
             case LAST_NAME:
-                return studentThrift.getLastName();
+                return studentXML.getLastName();
             case MIDDLE_NAME:
-                return studentThrift.getMiddleName();
+                return studentXML.getMiddleName();
             case DATE_OF_BIRTH:
-                return studentThrift.getDateOfBirth();
+                return studentXML.getDateOfBirth();
             case ADDRESS:
-                return studentThrift.getHomeAddress();
+                return studentXML.getHomeAddress();
             case GROUP:
-                return studentThrift.getStudentGroup().getName();
+                return studentXML.getStudentGroupXML().getName();
             default:
                 try {
                     throw new IllegalArgumentException("Column " + Integer.toString(columnIndex) + " not find");

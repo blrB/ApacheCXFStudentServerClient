@@ -1,11 +1,16 @@
 package by.bsuir.aipos.cxfclient;
 
+import by.bsuir.aipos.cxfserver.StudentServer;
 import by.bsuir.aipos.model.Student;
 import by.bsuir.aipos.model.StudentGroup;
+import by.bsuir.aipos.model.StudentGroupXML;
+import by.bsuir.aipos.model.StudentXML;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -82,9 +87,9 @@ public class StudentDialog {
     }
 
     private String[] getArrayGroupName() {
-        java.util.List<StudentGroup> studentGroupThrifts = mainWindow.getStudentClient().getAllStudentGroup();
+        java.util.List<StudentGroupXML> studentGroupThrifts = mainWindow.getStudentClient().getAllStudentGroup();
         List<String> groupName = studentGroupThrifts.stream()
-                .map(StudentGroup::getName).collect(Collectors.toList());
+                .map(StudentGroupXML::getName).collect(Collectors.toList());
         return groupName.toArray(new String[groupName.size()]);
     }
 
@@ -106,13 +111,15 @@ public class StudentDialog {
     }
 
     private void saveStudent(){
-        StudentGroup group = mainWindow.getStudentClient().getStudentGroupByName
+        StudentGroupXML group = mainWindow.getStudentClient().getStudentGroupByName
                 (this.group.getSelectedItem().toString());
-        Student student = new Student(
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String birthDate = format.format(jDateChooser.getDate());
+        StudentXML student = new StudentXML(
                 getTextID(FIRST_NAME),
                 getTextID(LAST_NAME),
                 getTextID(MIDDLE_NAME),
-                jDateChooser.getDate(),
+                birthDate,
                 getTextID(ADDRESS),
                 group
         );
@@ -129,17 +136,24 @@ public class StudentDialog {
         fieldID.get(key).setText(value);
     }
 
-    public void setField(Student student){
+    public void setField(StudentXML student){
         id = student.getId();
         setTextID(FIRST_NAME, student.getFirstName());
         setTextID(LAST_NAME, student.getLastName());
         if (student.getMiddleName() != null){
             setTextID(MIDDLE_NAME, student.getMiddleName());
         }
-        jDateChooser.setDate(student.getDateOfBirth());
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date birthDate = format.parse(student.getDateOfBirth());
+            jDateChooser.setDate(birthDate);
+        } catch (ParseException e) {
+            MainWindow.getLogger().error("ParseException");
+            StudentServer.getLogger().trace(e);
+        }
         setTextID(ADDRESS, student.getHomeAddress());
         group.setSelectedIndex
-                (Arrays.asList(studentGroupArray).indexOf(student.getStudentGroup().getName()));
+                (Arrays.asList(studentGroupArray).indexOf(student.getStudentGroupXML().getName()));
     }
 
 }

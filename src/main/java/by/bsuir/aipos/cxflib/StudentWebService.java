@@ -1,23 +1,21 @@
 package by.bsuir.aipos.cxflib;
 
-import by.bsuir.aipos.model.Student;
-import by.bsuir.aipos.model.StudentGroup;
+import by.bsuir.aipos.model.StudentGroupXML;
 import by.bsuir.aipos.model.StudentXML;
 
 import javax.jws.WebService;
-import java.util.List;
 
 @WebService
 public interface StudentWebService {
 
-    Student saveStudent(Student student);
-    Student getStudent(long id);
+    StudentXML saveStudent(StudentXML student);
+    StudentXML getStudent(long id);
     void deleteStudent(long id);
     StudentXML[] getAllStudent();
 
-    StudentGroup saveStudentGroup(StudentGroup group);
-    StudentGroup getStudentGroup(long id);
-    StudentGroup getStudentGroupByName(String name);
+    StudentGroupXML saveStudentGroup(StudentGroupXML group);
+    StudentGroupXML getStudentGroup(long id);
+    StudentGroupXML getStudentGroupByName(String name);
     void deleteStudentGroup(long id);
-    StudentGroup[] getAllStudentGroup();
+    StudentGroupXML[] getAllStudentGroup();
 }
