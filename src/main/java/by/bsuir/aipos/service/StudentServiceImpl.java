@@ -10,9 +10,12 @@ import javax.xml.ws.WebServiceProvider;
 import java.util.List;
 
 public class StudentServiceImpl implements StudentService{
-
+    /**
+     * Entity manager
+     */
     public EntityManager em = Persistence.createEntityManagerFactory("STUDENT_DB").createEntityManager();
 
+    @Override
     public Student save(Student student){
         em.getTransaction().begin();
         em.merge(student);
@@ -20,16 +23,19 @@ public class StudentServiceImpl implements StudentService{
         return student;
     }
 
+    @Override
     public Student get(long id){
         return em.find(Student.class, id);
     }
 
+    @Override
     public void delete(long id){
         em.getTransaction().begin();
         em.remove(get(id));
         em.getTransaction().commit();
     }
 
+    @Override
     public List<Student> getAll(){
         TypedQuery<Student> namedQuery = em.createNamedQuery("Student.getAll", Student.class);
         return namedQuery.getResultList();

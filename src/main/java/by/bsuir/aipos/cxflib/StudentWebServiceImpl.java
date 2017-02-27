@@ -17,24 +17,48 @@ import java.util.List;
 @WebService(endpointInterface = "by.bsuir.aipos.cxflib.StudentWebService",
         serviceName = "StudentWebService")
 public class StudentWebServiceImpl implements StudentWebService {
-
+    /**
+     * Logger
+     */
     private static Logger logger = Logger.getLogger(StudentWebServiceImpl.class);
+    /**
+     * Service for handling with student groups
+     */
     private static StudentGroupService studentGroupService;
+    /**
+     * Service for handling with students
+     */
     private static StudentService studentService;
 
-    public StudentWebServiceImpl(){
+    /**
+     * Initialize services for handling with students and student groups
+     */
+    public StudentWebServiceImpl() {
         studentGroupService = new StudentGroupServiceImpl();
         studentService = new StudentServiceImpl();
     }
 
+    /**
+     * Returns logger
+     *
+     * @return logger
+     */
     public static Logger getLogger() {
         return logger;
     }
 
+    /**
+     * Returns service for handling with student groups
+     * @return service for handling with student groups
+     */
     public static StudentGroupService getStudentGroupService() {
         return studentGroupService;
     }
 
+    /**
+     * Returns service for handling with student groups
+     * @return service for handling with student groups
+     */
     public static StudentService getStudentService() {
         return studentService;
     }
@@ -61,10 +85,10 @@ public class StudentWebServiceImpl implements StudentWebService {
     }
 
     @Override
-    public StudentXML[] getAllStudent(){
+    public StudentXML[] getAllStudent() {
         logger.info("Get all students");
         List<Student> students = getStudentService().getAll();
-        List<StudentXML> studentsXML  = new ArrayList<>();
+        List<StudentXML> studentsXML = new ArrayList<>();
         students.forEach(student -> {
             StudentXML studentXML = ConverterForStudentXMLAndORM.convert(student);
             studentsXML.add(studentXML);
@@ -104,7 +128,7 @@ public class StudentWebServiceImpl implements StudentWebService {
     public StudentGroupXML[] getAllStudentGroup() {
         logger.info("Get all student");
         List<StudentGroup> studentGroups = getStudentGroupService().getAll();
-        List<StudentGroupXML> studentGroupsXML  = new ArrayList<>();
+        List<StudentGroupXML> studentGroupsXML = new ArrayList<>();
         studentGroups.forEach(group -> {
             studentGroupsXML.add(ConverterForStudentXMLAndORM.convert(group));
         });

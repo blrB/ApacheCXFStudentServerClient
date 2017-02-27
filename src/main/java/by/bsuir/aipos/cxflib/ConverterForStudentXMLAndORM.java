@@ -11,7 +11,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ConverterForStudentXMLAndORM {
-
+    /**
+     * Converts student to XML representation
+     *
+     * @param student student to convert
+     * @return XML representation of student
+     */
     public static StudentXML convert(Student student) {
         StudentXML studentXML = new StudentXML();
         if(student.getId() != 0) {
@@ -33,6 +38,12 @@ public class ConverterForStudentXMLAndORM {
         return studentXML;
     }
 
+    /**
+     * Converts student group to XML
+     *
+     * @param studentGroup student group to convert
+     * @return XML representation of student group
+     */
     public static StudentGroupXML convert(StudentGroup studentGroup){
         StudentGroupXML studentGroupXML = new StudentGroupXML();
         if(studentGroup.getId() != 0) {
@@ -42,6 +53,11 @@ public class ConverterForStudentXMLAndORM {
         return studentGroupXML;
     }
 
+    /**
+     * Coverts XML representation of student to student
+     * @param studentXML XML representation of student
+     * @return converted student
+     */
     public static Student convert(StudentXML studentXML) {
         Student student = new Student();
         if(studentXML.getId() != 0) {
@@ -68,6 +84,11 @@ public class ConverterForStudentXMLAndORM {
         return student;
     }
 
+    /**
+     * Convert XML representation of student group to student group
+     * @param studentGroupXML XML representation of student group
+     * @return converted student group
+     */
     public static StudentGroup convert(StudentGroupXML studentGroupXML){
         StudentGroup studentGroup = new StudentGroup();
         if(studentGroupXML.getId() != 0) {

@@ -8,14 +8,34 @@ import java.awt.*;
 import java.util.regex.Pattern;
 
 public class MainWindow {
-
+    /**
+     * Logger
+     */
     public static Logger logger = Logger.getLogger(StudentClient.class);
+    /**
+     * Main frame
+     */
     private JFrame frame;
+    /**
+     * Host address of sever
+     */
     private String host;
+    /**
+     * Host port of server
+     */
     private int port;
+    /**
+     * Student client
+     */
     private StudentClient studentClient;
+    /**
+     * Table with students
+     */
     private StudentTable studentTable;
 
+    /**
+     * Create main window and add content to it
+     */
     public MainWindow() {
         frame = new JFrame("SOAP Student Client");
         host = getHost();
@@ -30,6 +50,11 @@ public class MainWindow {
         frame.setVisible(true);
     }
 
+    /**
+     * Toolbar creator
+     *
+     * @return created toolbar
+     */
     private JToolBar createToolBar() {
         JToolBar toolBar = new JToolBar();
         toolBar.setFloatable(false);
@@ -41,19 +66,28 @@ public class MainWindow {
         return toolBar;
     }
 
-    public void updateTable(){
+    /**
+     * Update table with students by getting data from server
+     */
+    public void updateTable() {
         logger.info("Update table");
         studentTable.updatePanel();
     }
 
-    private void addStudent(){
+    /**
+     * Create new student and add it to a table
+     */
+    private void addStudent() {
         logger.info("Add new student");
         StudentDialog dialog = new StudentDialog(this, "Add new Student");
         dialog.show();
         updateTable();
     }
 
-    private void editStudent(){
+    /**
+     * Edit selected student from a table
+     */
+    private void editStudent() {
         StudentXML student = studentTable.getSelectedStudent();
         if (student != null) {
             logger.info("Edit student");
@@ -69,7 +103,10 @@ public class MainWindow {
         }
     }
 
-    private void removeStudent(){
+    /**
+     * Remove selected student from a table
+     */
+    private void removeStudent() {
         StudentXML student = studentTable.getSelectedStudent();
         if (student != null) {
             logger.info("Remove student");
@@ -89,6 +126,11 @@ public class MainWindow {
         }
     }
 
+    /**
+     * Get server's host address that was entered by user
+     *
+     * @return server's host address
+     */
     private String getHost() {
         Pattern host = Pattern.compile("((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])");
         do {
@@ -108,6 +150,11 @@ public class MainWindow {
         return this.host;
     }
 
+    /**
+     * Get port entered by user
+     *
+     * @return server port
+     */
     private int getPort() {
         int minPort = 1;
         int maxPort = 65535;
@@ -128,24 +175,47 @@ public class MainWindow {
         return port;
     }
 
+    /**
+     * Client app runner
+     *
+     * @param args arguments
+     */
     public static void main(String[] args) {
         MainWindow mainWindow = new MainWindow();
         mainWindow.runClient();
     }
 
-    private void runClient(){
+    /**
+     * Init client connection
+     */
+    private void runClient() {
         studentClient = new StudentClient(host, port, this);
         studentClient.start();
     }
 
+    /**
+     * Get student client
+     *
+     * @return student client instance
+     */
     public StudentClient getStudentClient() {
         return studentClient;
     }
 
+    /**
+     * Get main window instance
+     *
+     * @return main window instance
+     */
     public JFrame getFrame() {
         return frame;
     }
 
+    /**
+     * Return logger
+     *
+     * @return logger
+     */
     public static Logger getLogger() {
         return logger;
     }

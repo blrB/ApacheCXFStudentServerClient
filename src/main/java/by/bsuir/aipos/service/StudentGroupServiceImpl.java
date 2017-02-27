@@ -13,6 +13,7 @@ public class StudentGroupServiceImpl implements StudentGroupService {
 
     public EntityManager em = Persistence.createEntityManagerFactory("STUDENT_DB").createEntityManager();
 
+    @Override
     public StudentGroup save(StudentGroup studentGroup){
         em.getTransaction().begin();
         em.merge(studentGroup);
@@ -20,22 +21,26 @@ public class StudentGroupServiceImpl implements StudentGroupService {
         return studentGroup;
     }
 
+    @Override
     public StudentGroup get(String name){
         TypedQuery<StudentGroup> namedQuery = em.createNamedQuery("StudentGroup.getByName", StudentGroup.class)
                 .setParameter("name", name);
         return namedQuery.getResultList().get(0) != null ? namedQuery.getResultList().get(0) : null;
     }
 
+    @Override
     public StudentGroup get(long id){
         return em.find(StudentGroup.class, id);
     }
 
+    @Override
     public void delete(long id){
         em.getTransaction().begin();
         em.remove(get(id));
         em.getTransaction().commit();
     }
 
+    @Override
     public List<StudentGroup> getAll(){
         TypedQuery<StudentGroup> namedQuery = em.createNamedQuery("StudentGroup.getAll", StudentGroup.class);
         return namedQuery.getResultList();

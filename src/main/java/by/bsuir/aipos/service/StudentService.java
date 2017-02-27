@@ -6,13 +6,33 @@ import javax.jws.WebService;
 import java.util.List;
 
 public interface StudentService{
+    /**
+     * Save student
+     *
+     * @param student student to save
+     * @return saved student
+     */
+    Student save(Student student);
 
-    public Student save(Student student);
+    /**
+     * Get student by identifier
+     *
+     * @param id identifier of student
+     * @return found student
+     */
+    Student get(long id);
 
-    public Student get(long id);
+    /**
+     * Delete student by identifier
+     *
+     * @param id identifier of student to delete
+     */
+    void delete(long id);
 
-    public void delete(long id);
-
-    public List<Student> getAll();
-
+    /**
+     * Get all student
+     *
+     * @return list of students
+     */
+    List<Student> getAll();
 }

@@ -6,11 +6,24 @@ import org.apache.log4j.Logger;
 import javax.xml.ws.Endpoint;
 
 public class StudentServer {
-
+    /**
+     * Logger
+     */
     private static Logger logger = Logger.getLogger(StudentServer.class);
+    /**
+     * Constant for default server's port
+     */
     private static final int DEFAULT_PORT = 8080;
+    /**
+     * Initialize port by default value
+     */
     private static int port = DEFAULT_PORT;
 
+    /**
+     * Server runner
+     *
+     * @param args the only sent argument is server's port
+     */
     public static void main(String[] args) {
         if (args.length > 0) {
             try {
@@ -24,6 +37,9 @@ public class StudentServer {
         studentServer.start();
     }
 
+    /**
+     * Run server
+     */
     private void start() {
         try {
             StudentWebServiceImpl implementor = new StudentWebServiceImpl();
@@ -36,11 +52,17 @@ public class StudentServer {
         }
     }
 
+    /**
+     * Returns logger
+     * @return logger
+     */
     public static Logger getLogger() {
         return logger;
     }
 
-
+    /**
+     * Write amazing text in a console
+     */
     private void startServer(){
         logger.info("Start server\n" +
                 "       _         __   __  __          _______ \n" +
