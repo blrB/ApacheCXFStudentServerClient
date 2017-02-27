@@ -22,21 +22,20 @@ public class StudentWebServiceImpl implements StudentWebService {
     private static StudentGroupService studentGroupService;
     private static StudentService studentService;
 
+    public StudentWebServiceImpl(){
+        studentGroupService = new StudentGroupServiceImpl();
+        studentService = new StudentServiceImpl();
+    }
+
     public static Logger getLogger() {
         return logger;
     }
 
     public static StudentGroupService getStudentGroupService() {
-        if (studentGroupService == null){
-            studentGroupService = new StudentGroupServiceImpl();
-        }
         return studentGroupService;
     }
 
     public static StudentService getStudentService() {
-        if (studentService == null){
-            studentService = new StudentServiceImpl();
-        }
         return studentService;
     }
 
