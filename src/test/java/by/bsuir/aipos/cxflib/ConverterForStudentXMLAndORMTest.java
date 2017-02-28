@@ -85,8 +85,15 @@ public class ConverterForStudentXMLAndORMTest {
         StudentGroupService studentGroupService = mock(StudentGroupService.class);
         Mockito.when(StudentWebServiceImpl.getStudentGroupService()).thenReturn(studentGroupService);
         when(studentGroupService.get(anyString())).thenReturn(studentGroup);
-        Student student = ConverterForStudentXMLAndORM.convert(studentXML);
-        assert (studentXML.getLastName().equals(student.getLastName()));
+        Student s = ConverterForStudentXMLAndORM.convert(studentXML);
+        assert (student.getId() == s.getId() &&
+                student.getFirstName().equals(s.getFirstName()) &&
+                student.getLastName().equals(s.getLastName()) &&
+                student.getMiddleName().equals(s.getMiddleName()) &&
+                student.getDateOfBirth().equals(s.getDateOfBirth()) &&
+                student.getHomeAddress().equals(s.getHomeAddress()) &&
+                student.getStudentGroup().getName().equals(s.getStudentGroup().getName())
+        );
     }
 
 }
