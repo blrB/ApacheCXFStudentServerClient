@@ -15,6 +15,9 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+DROP DATABASE IF EXISTS `student_db`;
+CREATE DATABASE `student_db` CHARACTER SET utf8 COLLATE utf8_general_ci;
+
 --
 -- Table structure for table `student`
 --
@@ -33,7 +36,7 @@ CREATE TABLE `student` (
   PRIMARY KEY (`id`),
   KEY `FK_pttwvms56jd6kpud0b3v2178x` (`studentGroup_id`),
   CONSTRAINT `FK_pttwvms56jd6kpud0b3v2178x` FOREIGN KEY (`studentGroup_id`) REFERENCES `student_group` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +45,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (1,'1996-12-05','Андрей','Бобруйск','Бобков','Валерьевич',2),(3,'1997-07-28','Лена','Гомель','Дюбина','',2);
+INSERT INTO `student` VALUES (1,'1996-12-05','Andrey','Bobrujsk','Bobkov','Valerievich',1),(3,'1997-07-28','Лена','Гомель','Дюбина','Александровна ',2),(4,'2017-02-25','1','1','1','1',1),(5,'2017-02-25','2','2','2','2',1),(6,'2017-02-25','3','3','3','3',1),(7,'2017-02-25','4','4','4','4',1),(8,'2017-02-25','5','5','5','5',1),(9,'2017-02-25','6','6','6','6',1),(10,'2017-02-25','7','7','7','7',1),(11,'2017-02-25','8','8','8','8',1),(12,'2017-02-25','9','9','9','9',1),(13,'2017-02-25','10','10','10','10',1);
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,4 +83,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-21 20:14:46
+-- Dump completed on 2017-03-08 19:38:13

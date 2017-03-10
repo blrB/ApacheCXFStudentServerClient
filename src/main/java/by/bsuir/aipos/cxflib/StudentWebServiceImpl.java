@@ -66,7 +66,8 @@ public class StudentWebServiceImpl implements StudentWebService {
     @Override
     public StudentXML saveStudent(StudentXML studentXML) {
         logger.info("Save student " + studentXML.getLastName());
-        Student student = getStudentService().save(ConverterForStudentXMLAndORM.convert(studentXML));
+        Student student = ConverterForStudentXMLAndORM.convert(studentXML);
+        getStudentService().save(student);
         studentXML.setId(student.getId());
         return studentXML;
     }
@@ -99,7 +100,8 @@ public class StudentWebServiceImpl implements StudentWebService {
     @Override
     public StudentGroupXML saveStudentGroup(StudentGroupXML group) {
         logger.info("Save group " + group.getName());
-        StudentGroup studentGroup = getStudentGroupService().save(ConverterForStudentXMLAndORM.convert(group));
+        StudentGroup studentGroup = ConverterForStudentXMLAndORM.convert(group);
+        getStudentGroupService().save(studentGroup);
         group.setId(studentGroup.getId());
         return group;
     }
